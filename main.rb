@@ -40,8 +40,9 @@ end
 solr = RSolr.connect url: solr_url
 solr.delete_by_query '*:*'
 solr.commit
+solr.optimize
 
-pb = ProgressBar.create title: "Doc pages(#{page_size}/pg)", total: (docs/page_size) + 1, format: '%t |%B| %c/%C %R/sec'
+pb = ProgressBar.create title: "Doc pages(#{page_size}/pg)", total: (docs/page_size) + 1, format: '%t |%B| %c/%C %R/sec %E'
 
 # push doc pages to repo
 (docs / page_size).times do |x|
